@@ -20,6 +20,8 @@ fun AuthenticationScreen(
     loadingState: Boolean,
     oneTapState: OneTapSignInState,
     messageBarState: MessageBarState,
+    onTokenIdReceived: (String) -> Unit,
+    onDialogDismissed: (String) -> Unit,
     onButtonClicked: () -> Unit,
 ) {
     Scaffold(content = {
@@ -35,8 +37,7 @@ fun AuthenticationScreen(
         state = oneTapState,
         clientId = CLIENT_ID,
         onTokenIdReceived = { tokenId ->
-            Log.d("AuthenticationScreen", "onTokenIdReceived: $tokenId")
-            messageBarState.addSuccess("Successfully Authenticated!")
+            onTokenIdReceived(tokenId)
             val credential = GoogleAuthProvider.getCredential(tokenId, null)
 //            FirebaseAuth.getInstance().signInWithCredential(credential)
 //                .addOnCompleteListener { task ->
@@ -48,8 +49,7 @@ fun AuthenticationScreen(
 //                }
         },
         onDialogDismissed = { message ->
-            Log.d("AuthenticationScreen", "onDialogDismissed: $message")
-//            onDialogDismissed(message)
+            onDialogDismissed(message)
         }
     )
 
