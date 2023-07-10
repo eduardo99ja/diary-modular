@@ -99,7 +99,7 @@ fun DiaryHolder(diary: Diary, onClick: (String) -> Unit) {
                     )
                 }
                 AnimatedVisibility(
-                    visible = galleryOpened ,
+                    visible = galleryOpened,
                     enter = fadeIn() + expandVertically(
                         animationSpec = spring(
                             dampingRatio = Spring.DampingRatioMediumBouncy,
@@ -108,8 +108,8 @@ fun DiaryHolder(diary: Diary, onClick: (String) -> Unit) {
                     )
                 ) {
                     Column(modifier = Modifier.padding(all = 14.dp)) {
-                        val imagesv = listOf("","")
-                        Gallery(images = imagesv)
+
+                        Gallery(images = diary.images)
                     }
                 }
 

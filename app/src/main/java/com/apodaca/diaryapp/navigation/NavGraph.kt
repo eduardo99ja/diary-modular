@@ -29,6 +29,7 @@ import com.apodaca.diaryapp.presentation.components.DisplayAlertDialog
 import com.apodaca.diaryapp.presentation.screens.auth.AuthenticationScreen
 import com.apodaca.diaryapp.presentation.screens.auth.AuthenticationViewModel
 import com.apodaca.diaryapp.presentation.screens.home.HomeScreen
+import com.apodaca.diaryapp.presentation.screens.home.HomeViewModel
 import com.apodaca.diaryapp.util.Constants.APP_ID
 import com.apodaca.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
 import com.stevdzasan.messagebar.rememberMessageBarState
@@ -116,10 +117,13 @@ fun NavGraphBuilder.homeRoute(
     navigateToAuth: () -> Unit
 ) {
     composable(route = Screen.Home.route) {
+        val viewModel: HomeViewModel = viewModel()
+        val diaries by viewModel.diaries
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
         var signOutDialogOpened by remember { mutableStateOf(false) }
         val scope = rememberCoroutineScope()
         HomeScreen(
+            diaries = diaries,
             drawerState = drawerState,
             onMenuClicked = {
                 scope.launch {
@@ -132,8 +136,8 @@ fun NavGraphBuilder.homeRoute(
             },
             navigateToWrite = navigateToWrite
         )
-        
-        LaunchedEffect(key1 = Unit ){
+
+        LaunchedEffect(key1 = Unit) {
             MongoDB.configureTheRealm()
         }
         DisplayAlertDialog(title = "Sign out",
