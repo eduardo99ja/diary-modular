@@ -35,6 +35,8 @@ import com.apodaca.diaryapp.presentation.screens.home.HomeViewModel
 import com.apodaca.diaryapp.presentation.screens.write.WriteScreen
 import com.apodaca.diaryapp.util.Constants.APP_ID
 import com.apodaca.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.rememberPagerState
 import com.stevdzasan.messagebar.rememberMessageBarState
 import com.stevdzasan.onetap.rememberOneTapSignInState
 import io.realm.kotlin.mongodb.App
@@ -187,9 +189,11 @@ fun NavGraphBuilder.homeRoute(
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 fun NavGraphBuilder.writeRoute(
     onBackPressed: () -> Unit
 ) {
+
     composable(
         route = Screen.Write.route,
         arguments = listOf(navArgument(name = WRITE_SCREEN_ARGUMENT_KEY) {
@@ -198,8 +202,11 @@ fun NavGraphBuilder.writeRoute(
             defaultValue = null
         })
     ) {
+
+        val pagerState = rememberPagerState()
         WriteScreen(
             selectedDiary = null,
+            pagerState = pagerState,
             onDeleteConfirmed = {},
             onBackPressed = onBackPressed
         )

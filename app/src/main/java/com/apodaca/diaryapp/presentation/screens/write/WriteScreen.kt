@@ -6,12 +6,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import com.apodaca.diaryapp.model.Diary
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.PagerState
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun WriteScreen(
     selectedDiary: Diary?,
+    pagerState: PagerState,
     onDeleteConfirmed: () -> Unit,
     onBackPressed: () -> Unit,
 ) {
@@ -24,8 +26,13 @@ fun WriteScreen(
             )
         },
         content = {
-
-
+            WriteContent(
+                pagerState = pagerState, title = "",
+                onTitleChanged = {},
+                description = "",
+                onDescriptionChanged = {},
+                paddingValues = it
+            )
         }
     )
 }
