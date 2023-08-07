@@ -33,6 +33,7 @@ import com.apodaca.diaryapp.presentation.screens.auth.AuthenticationViewModel
 import com.apodaca.diaryapp.presentation.screens.home.HomeScreen
 import com.apodaca.diaryapp.presentation.screens.home.HomeViewModel
 import com.apodaca.diaryapp.presentation.screens.write.WriteScreen
+import com.apodaca.diaryapp.presentation.screens.write.WriteViewModel
 import com.apodaca.diaryapp.util.Constants.APP_ID
 import com.apodaca.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -68,6 +69,9 @@ fun SetupNavGraph(
         homeRoute(
             navigateToWrite = {
                 navController.navigate(Screen.Write.route)
+            },
+            navigateToWriteWithArgs = { diaryId ->
+                navController.navigate(Screen.Write.passDiaryId(diaryId))
             },
             navigateToAuth = {
                 navController.navigate(Screen.Authentication.route) {
@@ -136,6 +140,7 @@ fun NavGraphBuilder.authenticationRoute(
 @OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.homeRoute(
     navigateToWrite: () -> Unit,
+    navigateToWriteWithArgs: (String) -> Unit,
     navigateToAuth: () -> Unit,
     onDataLoaded: () -> Unit
 ) {
@@ -163,7 +168,8 @@ fun NavGraphBuilder.homeRoute(
             onSignOutClicked = {
                 signOutDialogOpened = true
             },
-            navigateToWrite = navigateToWrite
+            navigateToWrite = navigateToWrite,
+            navigateToWriteWithArgs = navigateToWriteWithArgs,
         )
 
         LaunchedEffect(key1 = Unit) {
@@ -202,7 +208,9 @@ fun NavGraphBuilder.writeRoute(
             defaultValue = null
         })
     ) {
+        val viewModel: WriteViewModel = viewModel()
 
+        val uiState = viewModel.uiState
         val pagerState = rememberPagerState()
         WriteScreen(
             selectedDiary = null,
