@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.apodaca.diaryapp.data.repository.MongoDB
 import com.apodaca.diaryapp.model.Diary
+import com.apodaca.diaryapp.model.Mood
 import com.apodaca.diaryapp.model.RequestState
 import com.apodaca.diaryapp.presentation.components.DisplayAlertDialog
 import com.apodaca.diaryapp.presentation.screens.auth.AuthenticationScreen
@@ -212,9 +214,11 @@ fun NavGraphBuilder.writeRoute(
 
         val uiState = viewModel.uiState
         val pagerState = rememberPagerState()
+        val pageNumber by remember { derivedStateOf { pagerState.currentPage } }
+
         WriteScreen(
             uiState = uiState,
-            selectedDiary = null,
+            moodName = { Mood.values()[pageNumber].name },
             pagerState = pagerState,
             onTitleChange = { viewModel.setTitle(title = it) },
             onDescriptionChange = { viewModel.setDescription(description = it) },
