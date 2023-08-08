@@ -213,8 +213,11 @@ fun NavGraphBuilder.writeRoute(
         val uiState = viewModel.uiState
         val pagerState = rememberPagerState()
         WriteScreen(
+            uiState = uiState,
             selectedDiary = null,
             pagerState = pagerState,
+            onTitleChange = { viewModel.setTitle(title = it) },
+            onDescriptionChange = { viewModel.setDescription(description = it) },
             onDeleteConfirmed = {},
             onBackPressed = onBackPressed
         )
