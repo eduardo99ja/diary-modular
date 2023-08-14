@@ -67,7 +67,7 @@ class WriteViewModel(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             if (uiState.selectedDiaryId != null) {
-//                updateDiary(diary = diary, onSuccess = onSuccess, onError = onError)
+                updateDiary(diary = diary, onSuccess = onSuccess, onError = onError)
             } else {
                 insertDiary(diary = diary, onSuccess = onSuccess, onError = onError)
             }
@@ -83,6 +83,33 @@ class WriteViewModel(
 
         })
         if (result is RequestState.Success) {
+            withContext(Dispatchers.Main) {
+                onSuccess()
+            }
+        } else if (result is RequestState.Error) {
+            withContext(Dispatchers.Main) {
+                onError(result.error.message.toString())
+            }
+        }
+    }
+
+    private suspend fun updateDiary(
+        diary: Diary,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val result = MongoDB.updateDiary(diary = diary.apply {
+            _id = ObjectId.invoke(uiState.selectedDiaryId!!)
+            date =
+//                if (uiState.updatedDateTime != null) {
+//                uiState.updatedDateTime!!
+//            } else {
+                uiState.selectedDiary!!.date
+//            }
+        })
+        if (result is RequestState.Success) {
+//            uploadImagesToFirebase()
+//            deleteImagesFromFirebase()
             withContext(Dispatchers.Main) {
                 onSuccess()
             }
