@@ -21,6 +21,7 @@ fun WriteScreen(
     onDescriptionChange: (String) -> Unit,
     onDeleteConfirmed: () -> Unit,
     onBackPressed: () -> Unit,
+    onSaveClicked: (Diary) -> Unit,
 ) {
     // Update the Mood when selecting an existing Diary
     LaunchedEffect(key1 = uiState.mood) {
@@ -37,12 +38,14 @@ fun WriteScreen(
         },
         content = {
             WriteContent(
+                uiState = uiState,
                 pagerState = pagerState,
                 title = uiState.title,
                 onTitleChanged = onTitleChange,
                 description = uiState.description,
                 onDescriptionChanged = onDescriptionChange,
-                paddingValues = it
+                paddingValues = it,
+                onSaveClicked = onSaveClicked,
             )
         }
     )

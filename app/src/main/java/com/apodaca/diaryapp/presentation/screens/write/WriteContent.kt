@@ -33,6 +33,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.apodaca.diaryapp.model.Diary
 import com.apodaca.diaryapp.model.Mood
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -42,15 +43,18 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun WriteContent(
+    uiState: UiState,
     pagerState: PagerState,
     title: String,
     onTitleChanged: (String) -> Unit,
     description: String,
     onDescriptionChanged: (String) -> Unit,
     paddingValues: PaddingValues,
+    onSaveClicked: (Diary) -> Unit,
 ) {
 
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -137,7 +141,20 @@ fun WriteContent(
                     .fillMaxWidth()
                     .height(54.dp),
                 onClick = {
-
+                    if (uiState.title.isNotEmpty() && uiState.description.isNotEmpty()) {
+                        onSaveClicked(
+                            Diary().apply {
+                                this.title = uiState.title
+                                this.description = uiState.description
+                            }
+                        )
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Fields cannot be empty.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 },
                 shape = Shapes().small
             ) {

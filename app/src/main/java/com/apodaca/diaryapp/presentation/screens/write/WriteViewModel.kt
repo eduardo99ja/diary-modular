@@ -52,6 +52,38 @@ class WriteViewModel(
             }
         }
     }
+    fun upsertDiary(
+        diary: Diary,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (uiState.selectedDiaryId != null) {
+//                updateDiary(diary = diary, onSuccess = onSuccess, onError = onError)
+            } else {
+                insertDiary(diary = diary, onSuccess = onSuccess, onError = onError)
+            }
+        }
+    }
+
+    private suspend fun insertDiary(
+        diary: Diary,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit,
+    ) {
+        val result = MongoDB.insertDiary(diary = diary.apply {
+
+        })
+        if (result is RequestState.Success) {
+            withContext(Dispatchers.Main) {
+                onSuccess()
+            }
+        } else if (result is RequestState.Error) {
+            withContext(Dispatchers.Main) {
+                onError(result.error.message.toString())
+            }
+        }
+    }
 
     fun setTitle(title: String) {
         uiState = uiState.copy(title = title)
@@ -72,7 +104,7 @@ class WriteViewModel(
 
 data class UiState(
     val selectedDiaryId: String? = null,
-    val selectedDiary : Diary? = null,
+    val selectedDiary: Diary? = null,
     val title: String = "",
     val description: String = "",
     val mood: Mood = Mood.Neutral

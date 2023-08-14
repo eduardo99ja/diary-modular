@@ -1,5 +1,6 @@
 package com.apodaca.diaryapp.navigation
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +19,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -85,7 +87,7 @@ fun SetupNavGraph(
             onDataLoaded = onDataLoaded
         )
         writeRoute(
-            onBackPressed = {
+            navigateBack = {
                 navController.popBackStack()
             }
         )
@@ -199,7 +201,7 @@ fun NavGraphBuilder.homeRoute(
 
 @OptIn(ExperimentalPagerApi::class)
 fun NavGraphBuilder.writeRoute(
-    onBackPressed: () -> Unit
+    navigateBack: () -> Unit
 ) {
 
     composable(
@@ -212,6 +214,7 @@ fun NavGraphBuilder.writeRoute(
     ) {
         val viewModel: WriteViewModel = viewModel()
 
+        val context = LocalContext.current
         val uiState = viewModel.uiState
         val pagerState = rememberPagerState()
         val pageNumber by remember { derivedStateOf { pagerState.currentPage } }
@@ -223,7 +226,20 @@ fun NavGraphBuilder.writeRoute(
             onTitleChange = { viewModel.setTitle(title = it) },
             onDescriptionChange = { viewModel.setDescription(description = it) },
             onDeleteConfirmed = {},
-            onBackPressed = onBackPressed
+            onBackPressed = navigateBack,
+            onSaveClicked = {
+                viewModel.upsertDiary(
+                    diary = it.apply { mood = Mood.values()[pageNumber].name },
+                    onSuccess = navigateBack,
+                    onError = { message ->
+                        Toast.makeText(
+                            context,
+                            message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                )
+            },
         )
 
     }
