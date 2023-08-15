@@ -11,6 +11,7 @@ import com.apodaca.diaryapp.model.Diary
 import com.apodaca.diaryapp.model.Mood
 import com.apodaca.diaryapp.model.RequestState
 import com.apodaca.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
+import com.apodaca.diaryapp.util.toRealmInstant
 import io.realm.kotlin.types.RealmInstant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.mongodb.kbson.ObjectId
+import java.time.ZonedDateTime
 
 class WriteViewModel(
     private val savedStateHandle: SavedStateHandle,
@@ -60,6 +62,10 @@ class WriteViewModel(
         }
     }
 
+    fun updateDateTime(zonedDateTime: ZonedDateTime) {
+        uiState = uiState.copy(updatedDateTime = zonedDateTime.toInstant().toRealmInstant())
+    }
+
     fun upsertDiary(
         diary: Diary,
         onSuccess: () -> Unit,
@@ -80,7 +86,9 @@ class WriteViewModel(
         onError: (String) -> Unit,
     ) {
         val result = MongoDB.insertDiary(diary = diary.apply {
-
+            if (uiState.updatedDateTime != null) {
+                date = uiState.updatedDateTime!!
+            }
         })
         if (result is RequestState.Success) {
             withContext(Dispatchers.Main) {
@@ -100,12 +108,11 @@ class WriteViewModel(
     ) {
         val result = MongoDB.updateDiary(diary = diary.apply {
             _id = ObjectId.invoke(uiState.selectedDiaryId!!)
-            date =
-//                if (uiState.updatedDateTime != null) {
-//                uiState.updatedDateTime!!
-//            } else {
+            date = if (uiState.updatedDateTime != null) {
+                uiState.updatedDateTime!!
+            } else {
                 uiState.selectedDiary!!.date
-//            }
+            }
         })
         if (result is RequestState.Success) {
 //            uploadImagesToFirebase()
@@ -135,6 +142,8 @@ class WriteViewModel(
     fun setSelectedDiary(diary: Diary) {
         uiState = uiState.copy(selectedDiary = diary)
     }
+
+
 }
 
 data class UiState(
@@ -142,5 +151,6 @@ data class UiState(
     val selectedDiary: Diary? = null,
     val title: String = "",
     val description: String = "",
-    val mood: Mood = Mood.Neutral
+    val mood: Mood = Mood.Neutral,
+    val updatedDateTime: RealmInstant? = null
 )
