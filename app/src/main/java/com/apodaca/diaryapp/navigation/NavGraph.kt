@@ -225,7 +225,25 @@ fun NavGraphBuilder.writeRoute(
             pagerState = pagerState,
             onTitleChange = { viewModel.setTitle(title = it) },
             onDescriptionChange = { viewModel.setDescription(description = it) },
-            onDeleteConfirmed = {},
+            onDeleteConfirmed = {
+                viewModel.deleteDiary(
+                    onSuccess = {
+                        Toast.makeText(
+                            context,
+                            "Deleted",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        navigateBack()
+                    },
+                    onError = { message ->
+                        Toast.makeText(
+                            context,
+                            message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                )
+            },
             onDateTimeUpdated = { viewModel.updateDateTime(zonedDateTime = it) },
             onBackPressed = navigateBack,
             onSaveClicked = {

@@ -126,6 +126,28 @@ class WriteViewModel(
             }
         }
     }
+    fun deleteDiary(
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (uiState.selectedDiaryId != null) {
+                val result = MongoDB.deleteDiary(id = ObjectId.invoke(uiState.selectedDiaryId!!))
+                if (result is RequestState.Success) {
+                    withContext(Dispatchers.Main) {
+                        uiState.selectedDiary?.let {
+//                            deleteImagesFromFirebase(images = it.images)
+                        }
+                        onSuccess()
+                    }
+                } else if (result is RequestState.Error) {
+                    withContext(Dispatchers.Main) {
+                        onError(result.error.message.toString())
+                    }
+                }
+            }
+        }
+    }
 
     fun setTitle(title: String) {
         uiState = uiState.copy(title = title)
