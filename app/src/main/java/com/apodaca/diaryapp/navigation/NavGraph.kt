@@ -216,6 +216,7 @@ fun NavGraphBuilder.writeRoute(
 
         val context = LocalContext.current
         val uiState = viewModel.uiState
+        val galleryState = viewModel.galleryState
         val pagerState = rememberPagerState()
         val pageNumber by remember { derivedStateOf { pagerState.currentPage } }
 
@@ -223,6 +224,7 @@ fun NavGraphBuilder.writeRoute(
             uiState = uiState,
             moodName = { Mood.values()[pageNumber].name },
             pagerState = pagerState,
+            galleryState = galleryState,
             onTitleChange = { viewModel.setTitle(title = it) },
             onDescriptionChange = { viewModel.setDescription(description = it) },
             onDeleteConfirmed = {
@@ -259,6 +261,11 @@ fun NavGraphBuilder.writeRoute(
                     }
                 )
             },
+            onImageSelect = {
+                val type = context.contentResolver.getType(it)?.split("/")?.last() ?: "jpg"
+                viewModel.addImage(image = it, imageType = type)
+            },
+            onImageDeleteClicked = { galleryState.removeImage(it) }
         )
 
     }

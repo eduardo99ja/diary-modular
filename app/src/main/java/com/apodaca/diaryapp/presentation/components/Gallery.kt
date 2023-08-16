@@ -35,6 +35,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.apodaca.diaryapp.model.GalleryImage
+import com.apodaca.diaryapp.model.GalleryState
 import com.apodaca.diaryapp.ui.theme.Elevation
 import kotlin.math.max
 
@@ -88,6 +90,107 @@ fun Gallery(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun GalleryUploader(
+    modifier: Modifier = Modifier,
+    galleryState: GalleryState,
+    imageSize: Dp = 60.dp,
+    imageShape: CornerBasedShape = Shapes().medium,
+    spaceBetween: Dp = 12.dp,
+    onAddClicked: () -> Unit,
+    onImageSelect: (Uri) -> Unit,
+    onImageClicked: (GalleryImage) -> Unit,
+) {
+    val multiplePhotoPicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickMultipleVisualMedia(maxItems = 8),
+    ) { images ->
+        images.forEach {
+            onImageSelect(it)
+        }
+    }
+
+    BoxWithConstraints(modifier = modifier) {
+        val numberOfVisibleImages = remember {
+            derivedStateOf {
+                max(
+                    a = 0,
+                    b = this.maxWidth.div(spaceBetween + imageSize).toInt().minus(2)
+                )
+            }
+        }
+
+        val remainingImages = remember {
+            derivedStateOf {
+                galleryState.images.size - numberOfVisibleImages.value
+            }
+        }
+
+        Row {
+            AddImageButton(
+                imageSize = imageSize,
+                imageShape = imageShape,
+                onClick = {
+                    onAddClicked()
+                    multiplePhotoPicker.launch(
+                        PickVisualMediaRequest(
+                            ActivityResultContracts.PickVisualMedia.ImageOnly
+                        )
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.width(spaceBetween))
+            galleryState.images.take(numberOfVisibleImages.value).forEach { galleryImage ->
+                AsyncImage(
+                    modifier = Modifier
+                        .clip(imageShape)
+                        .size(imageSize)
+                        .clickable { onImageClicked(galleryImage) },
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(galleryImage.image)
+                        .crossfade(true)
+                        .build(),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = "Gallery Image"
+                )
+                Spacer(modifier = Modifier.width(spaceBetween))
+            }
+            if (remainingImages.value > 0) {
+                LastImageOverlay(
+                    imageSize = imageSize,
+                    imageShape = imageShape,
+                    remainingImages = remainingImages.value
+                )
+            }
+        }
+    }
+}
+
+@ExperimentalMaterial3Api
+@Composable
+fun AddImageButton(
+    imageSize: Dp,
+    imageShape: CornerBasedShape,
+    onClick: () -> Unit
+) {
+    Surface(
+        modifier = Modifier
+            .size(imageSize)
+            .clip(shape = imageShape),
+        onClick = onClick,
+        tonalElevation = Elevation.Level1
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = "Add Icon",
+            )
+        }
+    }
+}
 
 @Composable
 fun LastImageOverlay(

@@ -1,5 +1,6 @@
 package com.apodaca.diaryapp.presentation.screens.write
 
+import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -8,10 +9,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apodaca.diaryapp.data.repository.MongoDB
 import com.apodaca.diaryapp.model.Diary
+import com.apodaca.diaryapp.model.GalleryImage
+import com.apodaca.diaryapp.model.GalleryState
 import com.apodaca.diaryapp.model.Mood
 import com.apodaca.diaryapp.model.RequestState
 import com.apodaca.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
 import com.apodaca.diaryapp.util.toRealmInstant
+import com.google.firebase.auth.FirebaseAuth
 import io.realm.kotlin.types.RealmInstant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -24,6 +28,7 @@ import java.time.ZonedDateTime
 class WriteViewModel(
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+    val galleryState = GalleryState()
 
     var uiState by mutableStateOf(UiState())
         private set
@@ -126,6 +131,7 @@ class WriteViewModel(
             }
         }
     }
+
     fun deleteDiary(
         onSuccess: () -> Unit,
         onError: (String) -> Unit
@@ -147,6 +153,17 @@ class WriteViewModel(
                 }
             }
         }
+    }
+
+    fun addImage(image: Uri, imageType: String) {
+//        val remoteImagePath = "images/${FirebaseAuth.getInstance().currentUser?.uid}/" +
+//                "${image.lastPathSegment}-${System.currentTimeMillis()}.$imageType"
+//        galleryState.addImage(
+//            GalleryImage(
+//                image = image,
+//                remoteImagePath = remoteImagePath
+//            )
+//        )
     }
 
     fun setTitle(title: String) {
