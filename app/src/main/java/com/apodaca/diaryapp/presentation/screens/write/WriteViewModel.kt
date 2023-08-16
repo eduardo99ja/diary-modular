@@ -16,6 +16,7 @@ import com.apodaca.diaryapp.model.RequestState
 import com.apodaca.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
 import com.apodaca.diaryapp.util.toRealmInstant
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import io.realm.kotlin.types.RealmInstant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -32,6 +33,22 @@ class WriteViewModel(
 
     var uiState by mutableStateOf(UiState())
         private set
+
+    fun setTitle(title: String) {
+        uiState = uiState.copy(title = title)
+    }
+
+    fun setDescription(description: String) {
+        uiState = uiState.copy(description = description)
+    }
+
+    fun setMood(mood: Mood) {
+        uiState = uiState.copy(mood = mood)
+    }
+
+    fun setSelectedDiary(diary: Diary) {
+        uiState = uiState.copy(selectedDiary = diary)
+    }
 
     init {
         getDiaryIdArgument()
@@ -96,6 +113,7 @@ class WriteViewModel(
             }
         })
         if (result is RequestState.Success) {
+            uploadImagesToFirebase()
             withContext(Dispatchers.Main) {
                 onSuccess()
             }
@@ -120,7 +138,7 @@ class WriteViewModel(
             }
         })
         if (result is RequestState.Success) {
-//            uploadImagesToFirebase()
+            uploadImagesToFirebase()
 //            deleteImagesFromFirebase()
             withContext(Dispatchers.Main) {
                 onSuccess()
@@ -165,22 +183,29 @@ class WriteViewModel(
             )
         )
     }
-
-    fun setTitle(title: String) {
-        uiState = uiState.copy(title = title)
+    private fun uploadImagesToFirebase() {
+        val storage = FirebaseStorage.getInstance().reference
+        galleryState.images.forEach { galleryImage ->
+            val imagePath = storage.child(galleryImage.remoteImagePath)
+            imagePath.putFile(galleryImage.image)
+                .addOnProgressListener {
+                    val sessionUri = it.uploadSessionUri
+                    if (sessionUri != null) {
+                        viewModelScope.launch(Dispatchers.IO) {
+//                            imageToUploadDao.addImageToUpload(
+//                                ImageToUpload(
+//                                    remoteImagePath = galleryImage.remoteImagePath,
+//                                    imageUri = galleryImage.image.toString(),
+//                                    sessionUri = sessionUri.toString()
+//                                )
+//                            )
+                        }
+                    }
+                }
+        }
     }
 
-    fun setDescription(description: String) {
-        uiState = uiState.copy(description = description)
-    }
 
-    fun setMood(mood: Mood) {
-        uiState = uiState.copy(mood = mood)
-    }
-
-    fun setSelectedDiary(diary: Diary) {
-        uiState = uiState.copy(selectedDiary = diary)
-    }
 
 
 }
