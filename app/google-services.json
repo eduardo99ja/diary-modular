@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "728082660140",
+    "project_id": "diaryapp-391804",
+    "storage_bucket": "diaryapp-391804.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728082660140:android:9d2e44226b65c20a79ca89",
+        "android_client_info": {
+          "package_name": "com.apodaca.diaryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728082660140-h1nc3mt3kcg27rs49c2sc8j7cf6jpi89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUI31a3RMqxpr3xIZ8MBrmOEVBnV_lx4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728082660140-1aqbfq7grn8skl7gc6o25vchn17dhob2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

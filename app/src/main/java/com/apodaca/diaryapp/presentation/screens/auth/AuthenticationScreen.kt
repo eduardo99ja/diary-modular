@@ -27,8 +27,9 @@ fun AuthenticationScreen(
     loadingState: Boolean,
     oneTapState: OneTapSignInState,
     messageBarState: MessageBarState,
-    onTokenIdReceived: (String) -> Unit,
     onDialogDismissed: (String) -> Unit,
+    onSuccessfulFirebaseSignIn: (String) -> Unit,
+    onFailedFirebaseSignIn: (Exception) -> Unit,
     navigateToHome: () -> Unit,
     onButtonClicked: () -> Unit,
 ) {
@@ -50,16 +51,15 @@ fun AuthenticationScreen(
         state = oneTapState,
         clientId = CLIENT_ID,
         onTokenIdReceived = { tokenId ->
-            onTokenIdReceived(tokenId)
             val credential = GoogleAuthProvider.getCredential(tokenId, null)
-//            FirebaseAuth.getInstance().signInWithCredential(credential)
-//                .addOnCompleteListener { task ->
-//                    if(task.isSuccessful) {
-//                        onSuccessfulFirebaseSignIn(tokenId)
-//                    } else {
-//                        task.exception?.let { it -> onFailedFirebaseSignIn(it) }
-//                    }
-//                }
+            FirebaseAuth.getInstance().signInWithCredential(credential)
+                .addOnCompleteListener { task ->
+                    if(task.isSuccessful) {
+                        onSuccessfulFirebaseSignIn(tokenId)
+                    } else {
+                        task.exception?.let { it -> onFailedFirebaseSignIn(it) }
+                    }
+                }
         },
         onDialogDismissed = { message ->
             onDialogDismissed(message)

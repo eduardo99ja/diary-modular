@@ -18,6 +18,7 @@ import com.apodaca.diaryapp.navigation.Screen
 import com.apodaca.diaryapp.navigation.SetupNavGraph
 import com.apodaca.diaryapp.ui.theme.DiaryAppTheme
 import com.apodaca.diaryapp.util.Constants.APP_ID
+import com.google.firebase.FirebaseApp
 import io.realm.kotlin.mongodb.App
 
 class MainActivity : ComponentActivity() {
@@ -29,8 +30,9 @@ class MainActivity : ComponentActivity() {
             keepSplashOpened
         }
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        FirebaseApp.initializeApp(this)
         setContent {
-            DiaryAppTheme {
+            DiaryAppTheme(dynamicColor = false) {
                 val navController = rememberNavController()
                 SetupNavGraph(
                     startDestination = getStartDestination(),
