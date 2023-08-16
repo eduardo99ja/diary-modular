@@ -156,14 +156,14 @@ class WriteViewModel(
     }
 
     fun addImage(image: Uri, imageType: String) {
-//        val remoteImagePath = "images/${FirebaseAuth.getInstance().currentUser?.uid}/" +
-//                "${image.lastPathSegment}-${System.currentTimeMillis()}.$imageType"
-//        galleryState.addImage(
-//            GalleryImage(
-//                image = image,
-//                remoteImagePath = remoteImagePath
-//            )
-//        )
+        val remoteImagePath = "images/${FirebaseAuth.getInstance().currentUser?.uid}/" +
+                "${image.lastPathSegment}-${System.currentTimeMillis()}.$imageType"
+        galleryState.addImage(
+            GalleryImage(
+                image = image,
+                remoteImagePath = remoteImagePath
+            )
+        )
     }
 
     fun setTitle(title: String) {
