@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import com.apodaca.diaryapp.R
 import com.apodaca.diaryapp.data.repository.Diaries
 import com.apodaca.diaryapp.model.RequestState
+import java.time.ZonedDateTime
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,6 +51,9 @@ fun HomeScreen(
     diaries: Diaries,
     onMenuClicked: () -> Unit,
     drawerState: DrawerState,
+    dateIsSelected: Boolean,
+    onDateSelected: (ZonedDateTime) -> Unit,
+    onDateReset: () -> Unit,
     onSignOutClicked: () -> Unit,
     onDeleteAllClicked: () -> Unit,
     navigateToWrite: () -> Unit,
@@ -67,7 +71,10 @@ fun HomeScreen(
             topBar = {
                 HomeTopBar(
                     scrollBehavior = scrollBehavior,
-                    onMenuClicked = onMenuClicked
+                    onMenuClicked = onMenuClicked,
+                    dateIsSelected = dateIsSelected,
+                    onDateSelected = onDateSelected,
+                    onDateReset = onDateReset
                 )
             },
             floatingActionButton = {
