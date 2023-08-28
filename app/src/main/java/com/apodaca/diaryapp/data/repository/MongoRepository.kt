@@ -19,4 +19,7 @@ interface MongoRepository {
     suspend fun updateDiary(diary: Diary): RequestState<Diary>
 
     suspend fun deleteDiary(id: ObjectId): RequestState<Boolean>
+
+    suspend fun deleteAllDiaries(): RequestState<Boolean>
+
 }
