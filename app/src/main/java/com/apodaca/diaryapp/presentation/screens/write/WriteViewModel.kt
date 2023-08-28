@@ -7,7 +7,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.apodaca.diaryapp.data.database.ImageToDeleteDao
 import com.apodaca.diaryapp.data.database.ImageToUploadDao
+import com.apodaca.diaryapp.data.database.entity.ImageToDelete
 import com.apodaca.diaryapp.data.database.entity.ImageToUpload
 import com.apodaca.diaryapp.data.repository.MongoDB
 import com.apodaca.diaryapp.model.Diary
@@ -37,6 +39,7 @@ import javax.inject.Inject
 class WriteViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val imageToUploadDao: ImageToUploadDao,
+    private val imageToDeleteDao: ImageToDeleteDao
 ) : ViewModel() {
     val galleryState = GalleryState()
 
@@ -236,11 +239,11 @@ class WriteViewModel @Inject constructor(
             images.forEach { remotePath ->
                 storage.child(remotePath).delete()
                     .addOnFailureListener {
-//                        viewModelScope.launch(Dispatchers.IO) {
-//                            imageToDeleteDao.addImageToDelete(
-//                                ImageToDelete(remoteImagePath = remotePath)
-//                            )
-//                        }
+                        viewModelScope.launch(Dispatchers.IO) {
+                            imageToDeleteDao.addImageToDelete(
+                                ImageToDelete(remoteImagePath = remotePath)
+                            )
+                        }
                     }
             }
         } else {
@@ -248,9 +251,9 @@ class WriteViewModel @Inject constructor(
                 storage.child(remotePath).delete()
                     .addOnFailureListener {
                         viewModelScope.launch(Dispatchers.IO) {
-//                            imageToDeleteDao.addImageToDelete(
-//                                ImageToDelete(remoteImagePath = remotePath)
-//                            )
+                            imageToDeleteDao.addImageToDelete(
+                                ImageToDelete(remoteImagePath = remotePath)
+                            )
                         }
                     }
             }
