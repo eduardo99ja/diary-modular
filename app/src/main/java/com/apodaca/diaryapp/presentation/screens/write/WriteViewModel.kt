@@ -163,7 +163,7 @@ class WriteViewModel @Inject constructor(
         })
         if (result is RequestState.Success) {
             uploadImagesToFirebase()
-//            deleteImagesFromFirebase()
+            deleteImagesFromFirebase()
             withContext(Dispatchers.Main) {
                 onSuccess()
             }
@@ -184,7 +184,7 @@ class WriteViewModel @Inject constructor(
                 if (result is RequestState.Success) {
                     withContext(Dispatchers.Main) {
                         uiState.selectedDiary?.let {
-//                            deleteImagesFromFirebase(images = it.images)
+                            deleteImagesFromFirebase(images = it.images)
                         }
                         onSuccess()
                     }
@@ -227,6 +227,33 @@ class WriteViewModel @Inject constructor(
                         }
                     }
                 }
+        }
+    }
+
+    private fun deleteImagesFromFirebase(images: List<String>? = null) {
+        val storage = FirebaseStorage.getInstance().reference
+        if (images != null) {
+            images.forEach { remotePath ->
+                storage.child(remotePath).delete()
+                    .addOnFailureListener {
+//                        viewModelScope.launch(Dispatchers.IO) {
+//                            imageToDeleteDao.addImageToDelete(
+//                                ImageToDelete(remoteImagePath = remotePath)
+//                            )
+//                        }
+                    }
+            }
+        } else {
+            galleryState.imagesToBeDeleted.map { it.remoteImagePath }.forEach { remotePath ->
+                storage.child(remotePath).delete()
+                    .addOnFailureListener {
+                        viewModelScope.launch(Dispatchers.IO) {
+//                            imageToDeleteDao.addImageToDelete(
+//                                ImageToDelete(remoteImagePath = remotePath)
+//                            )
+                        }
+                    }
+            }
         }
     }
 
