@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.presentation.components
+package com.apodaca.ui.components
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -35,9 +35,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.apodaca.diaryapp.model.GalleryImage
-import com.apodaca.diaryapp.model.GalleryState
-import com.apodaca.diaryapp.ui.theme.Elevation
+import com.apodaca.ui.GalleryImage
+import com.apodaca.ui.GalleryState
+import com.apodaca.ui.theme.Elevation
 import kotlin.math.max
 
 @Composable

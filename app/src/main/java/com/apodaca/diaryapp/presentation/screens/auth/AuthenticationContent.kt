@@ -17,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.apodaca.diaryapp.R
-import com.apodaca.diaryapp.presentation.components.GoogleButton
+import com.apodaca.ui.components.GoogleButton
 
 @Composable
 fun AuthenticationContent(

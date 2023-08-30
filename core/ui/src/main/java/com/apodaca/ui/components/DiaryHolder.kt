@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.presentation.components
+package com.apodaca.ui.components
 
 import android.net.Uri
 import android.widget.Toast
@@ -45,7 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.apodaca.diaryapp.model.Diary
 import com.apodaca.diaryapp.model.Mood
-import com.apodaca.diaryapp.ui.theme.Elevation
+import com.apodaca.ui.theme.Elevation
 import com.apodaca.diaryapp.util.fetchImagesFromFirebase
 import com.apodaca.diaryapp.util.toInstant
 import io.realm.kotlin.ext.realmListOf

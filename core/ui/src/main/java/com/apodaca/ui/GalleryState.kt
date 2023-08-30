@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.model
+package com.apodaca.ui
 
 import android.net.Uri
 import androidx.compose.runtime.Composable

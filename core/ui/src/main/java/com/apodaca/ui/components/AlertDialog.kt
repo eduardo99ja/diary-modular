@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.presentation.components
+package com.apodaca.ui.components
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button

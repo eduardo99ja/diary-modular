@@ -2,22 +2,22 @@ package com.apodaca.diaryapp.model
 
 import androidx.compose.ui.graphics.Color
 import com.apodaca.diaryapp.R
-import com.apodaca.diaryapp.ui.theme.AngryColor
-import com.apodaca.diaryapp.ui.theme.AwfulColor
-import com.apodaca.diaryapp.ui.theme.BoredColor
-import com.apodaca.diaryapp.ui.theme.CalmColor
-import com.apodaca.diaryapp.ui.theme.DepressedColor
-import com.apodaca.diaryapp.ui.theme.DisappointedColor
-import com.apodaca.diaryapp.ui.theme.HappyColor
-import com.apodaca.diaryapp.ui.theme.HumorousColor
-import com.apodaca.diaryapp.ui.theme.LonelyColor
-import com.apodaca.diaryapp.ui.theme.MysteriousColor
-import com.apodaca.diaryapp.ui.theme.NeutralColor
-import com.apodaca.diaryapp.ui.theme.RomanticColor
-import com.apodaca.diaryapp.ui.theme.ShamefulColor
-import com.apodaca.diaryapp.ui.theme.SurprisedColor
-import com.apodaca.diaryapp.ui.theme.SuspiciousColor
-import com.apodaca.diaryapp.ui.theme.TenseColor
+import com.apodaca.ui.theme.AngryColor
+import com.apodaca.ui.theme.AwfulColor
+import com.apodaca.ui.theme.BoredColor
+import com.apodaca.ui.theme.CalmColor
+import com.apodaca.ui.theme.DepressedColor
+import com.apodaca.ui.theme.DisappointedColor
+import com.apodaca.ui.theme.HappyColor
+import com.apodaca.ui.theme.HumorousColor
+import com.apodaca.ui.theme.LonelyColor
+import com.apodaca.ui.theme.MysteriousColor
+import com.apodaca.ui.theme.NeutralColor
+import com.apodaca.ui.theme.RomanticColor
+import com.apodaca.ui.theme.ShamefulColor
+import com.apodaca.ui.theme.SurprisedColor
+import com.apodaca.ui.theme.SuspiciousColor
+import com.apodaca.ui.theme.TenseColor
 
 enum class Mood(
     val icon: Int,

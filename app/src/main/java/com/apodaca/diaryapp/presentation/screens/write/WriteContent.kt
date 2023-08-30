@@ -40,7 +40,7 @@ import com.apodaca.diaryapp.model.Diary
 import com.apodaca.diaryapp.model.GalleryImage
 import com.apodaca.diaryapp.model.GalleryState
 import com.apodaca.diaryapp.model.Mood
-import com.apodaca.diaryapp.presentation.components.GalleryUploader
+import com.apodaca.ui.components.GalleryUploader
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState

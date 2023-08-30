@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.presentation.components
+package com.apodaca.ui.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -33,7 +33,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.apodaca.diaryapp.R
+import com.apodaca.ui.R
 
 @Composable
 fun GoogleButton(

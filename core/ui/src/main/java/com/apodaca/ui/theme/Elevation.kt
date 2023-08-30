@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.ui.theme
+package com.apodaca.ui.theme
 
 import androidx.compose.ui.unit.dp
 
