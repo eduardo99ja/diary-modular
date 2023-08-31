@@ -1,6 +1,7 @@
-package com.apodaca.diaryapp.model
+package com.apodaca.util.model
 
-import com.apodaca.diaryapp.util.toRealmInstant
+import android.annotation.SuppressLint
+import com.apodaca.util.toRealmInstant
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.types.RealmInstant
 import io.realm.kotlin.types.RealmList
@@ -17,5 +18,6 @@ open class Diary : RealmObject {
     var title: String = ""
     var description: String = ""
     var images: RealmList<String> = realmListOf()
+    @SuppressLint("NewApi")
     var date: RealmInstant = Instant.now().toRealmInstant()
 }

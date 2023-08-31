@@ -22,8 +22,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.apodaca.diaryapp.data.repository.MongoDB
-import com.apodaca.diaryapp.model.Mood
-import com.apodaca.diaryapp.model.RequestState
+import com.apodaca.util.model.Mood
+import com.apodaca.util.model.RequestState
 import com.apodaca.ui.components.DisplayAlertDialog
 import com.apodaca.diaryapp.presentation.screens.auth.AuthenticationScreen
 import com.apodaca.diaryapp.presentation.screens.auth.AuthenticationViewModel

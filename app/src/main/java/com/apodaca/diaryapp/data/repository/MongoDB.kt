@@ -1,7 +1,7 @@
 package com.apodaca.diaryapp.data.repository
 
-import com.apodaca.diaryapp.model.Diary
-import com.apodaca.diaryapp.model.RequestState
+import com.apodaca.util.model.Diary
+import com.apodaca.util.model.RequestState
 import com.apodaca.diaryapp.util.Constants.APP_ID
 import com.apodaca.diaryapp.util.toInstant
 import io.realm.kotlin.Realm

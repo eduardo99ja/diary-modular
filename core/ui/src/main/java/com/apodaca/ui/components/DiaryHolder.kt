@@ -43,11 +43,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.apodaca.diaryapp.model.Diary
-import com.apodaca.diaryapp.model.Mood
 import com.apodaca.ui.theme.Elevation
-import com.apodaca.diaryapp.util.fetchImagesFromFirebase
-import com.apodaca.diaryapp.util.toInstant
+import com.apodaca.util.fetchImagesFromFirebase
+import com.apodaca.util.model.Diary
+import com.apodaca.util.model.Mood
+import com.apodaca.util.toInstant
 import io.realm.kotlin.ext.realmListOf
 import java.text.SimpleDateFormat
 import java.time.Instant

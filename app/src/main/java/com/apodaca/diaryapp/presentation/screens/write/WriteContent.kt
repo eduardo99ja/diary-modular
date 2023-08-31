@@ -36,10 +36,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.apodaca.diaryapp.model.Diary
+import com.apodaca.util.model.Diary
 import com.apodaca.diaryapp.model.GalleryImage
 import com.apodaca.diaryapp.model.GalleryState
-import com.apodaca.diaryapp.model.Mood
+import com.apodaca.util.model.Mood
 import com.apodaca.ui.components.GalleryUploader
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager

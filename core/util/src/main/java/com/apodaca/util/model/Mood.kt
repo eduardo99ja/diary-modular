@@ -1,7 +1,6 @@
-package com.apodaca.diaryapp.model
+package com.apodaca.util.model
 
 import androidx.compose.ui.graphics.Color
-import com.apodaca.diaryapp.R
 import com.apodaca.ui.theme.AngryColor
 import com.apodaca.ui.theme.AwfulColor
 import com.apodaca.ui.theme.BoredColor
@@ -18,6 +17,7 @@ import com.apodaca.ui.theme.ShamefulColor
 import com.apodaca.ui.theme.SurprisedColor
 import com.apodaca.ui.theme.SuspiciousColor
 import com.apodaca.ui.theme.TenseColor
+import com.apodaca.util.R
 
 enum class Mood(
     val icon: Int,

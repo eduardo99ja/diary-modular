@@ -23,7 +23,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.apodaca.diaryapp.model.Diary
+import com.apodaca.util.model.Diary
 import com.apodaca.ui.components.DiaryHolder
 import java.time.LocalDate
 

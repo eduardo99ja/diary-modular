@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.apodaca.diaryapp.R
 import com.apodaca.diaryapp.data.repository.Diaries
-import com.apodaca.diaryapp.model.RequestState
+import com.apodaca.util.model.RequestState
 import java.time.ZonedDateTime
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

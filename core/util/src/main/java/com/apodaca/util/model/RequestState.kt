@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.model
+package com.apodaca.util.model
 
 sealed class RequestState<out T> {
     object Idle : RequestState<Nothing>()

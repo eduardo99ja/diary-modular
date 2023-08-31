@@ -12,11 +12,11 @@ import com.apodaca.diaryapp.data.database.ImageToUploadDao
 import com.apodaca.diaryapp.data.database.entity.ImageToDelete
 import com.apodaca.diaryapp.data.database.entity.ImageToUpload
 import com.apodaca.diaryapp.data.repository.MongoDB
-import com.apodaca.diaryapp.model.Diary
+import com.apodaca.util.model.Diary
 import com.apodaca.diaryapp.model.GalleryImage
 import com.apodaca.diaryapp.model.GalleryState
-import com.apodaca.diaryapp.model.Mood
-import com.apodaca.diaryapp.model.RequestState
+import com.apodaca.util.model.Mood
+import com.apodaca.util.model.RequestState
 import com.apodaca.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
 import com.apodaca.diaryapp.util.fetchImagesFromFirebase
 import com.apodaca.diaryapp.util.toRealmInstant
@@ -28,7 +28,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.realm.kotlin.types.RealmInstant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.mongodb.kbson.ObjectId

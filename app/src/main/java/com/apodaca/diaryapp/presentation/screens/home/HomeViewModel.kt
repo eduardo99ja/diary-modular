@@ -8,13 +8,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.apodaca.diaryapp.connectivity.ConnectivityObserver
-import com.apodaca.diaryapp.connectivity.NetworkConnectivityObserver
+import com.apodaca.util.connectivity.ConnectivityObserver
+import com.apodaca.util.connectivity.NetworkConnectivityObserver
 import com.apodaca.diaryapp.data.database.ImageToDeleteDao
 import com.apodaca.diaryapp.data.database.entity.ImageToDelete
 import com.apodaca.diaryapp.data.repository.Diaries
 import com.apodaca.diaryapp.data.repository.MongoDB
-import com.apodaca.diaryapp.model.RequestState
+import com.apodaca.util.model.RequestState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
