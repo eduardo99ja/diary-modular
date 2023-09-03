@@ -1,10 +1,10 @@
-package com.apodaca.diaryapp.data.database
+package com.apodaca.mongo.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.apodaca.diaryapp.data.database.entity.ImageToDelete
+import com.apodaca.mongo.database.entity.ImageToDelete
 
 @Dao
 interface ImageToDeleteDao {

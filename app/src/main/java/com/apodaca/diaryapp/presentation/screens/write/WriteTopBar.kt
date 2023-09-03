@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.apodaca.util.model.Diary
 import com.apodaca.ui.components.DisplayAlertDialog
-import com.apodaca.diaryapp.util.toInstant
+import com.apodaca.util.toInstant
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig

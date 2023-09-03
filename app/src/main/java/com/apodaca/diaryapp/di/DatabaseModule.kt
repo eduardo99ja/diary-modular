@@ -2,9 +2,9 @@ package com.apodaca.diaryapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.apodaca.mongo.database.ImagesDatabase
+import com.apodaca.util.Constants.IMAGES_DATABASE
 import com.apodaca.util.connectivity.NetworkConnectivityObserver
-import com.apodaca.diaryapp.data.database.ImagesDatabase
-import com.apodaca.diaryapp.util.Constants.IMAGES_DATABASE
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

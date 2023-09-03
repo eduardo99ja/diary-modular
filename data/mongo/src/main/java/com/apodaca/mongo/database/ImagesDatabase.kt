@@ -1,9 +1,9 @@
-package com.apodaca.diaryapp.data.database
+package com.apodaca.mongo.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.apodaca.diaryapp.data.database.entity.ImageToDelete
-import com.apodaca.diaryapp.data.database.entity.ImageToUpload
+import com.apodaca.mongo.database.entity.ImageToDelete
+import com.apodaca.mongo.database.entity.ImageToUpload
 
 
 @Database(

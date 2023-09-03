@@ -1,8 +1,8 @@
-package com.apodaca.diaryapp.data.database.entity
+package com.apodaca.mongo.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.apodaca.diaryapp.util.Constants.IMAGE_TO_DELETE_TABLE
+import com.apodaca.util.Constants.IMAGE_TO_DELETE_TABLE
 
 @Entity(tableName = IMAGE_TO_DELETE_TABLE)
 data class ImageToDelete(

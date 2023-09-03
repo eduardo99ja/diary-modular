@@ -21,7 +21,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.apodaca.diaryapp.data.repository.MongoDB
 import com.apodaca.util.model.Mood
 import com.apodaca.util.model.RequestState
 import com.apodaca.ui.components.DisplayAlertDialog
@@ -31,8 +30,10 @@ import com.apodaca.diaryapp.presentation.screens.home.HomeScreen
 import com.apodaca.diaryapp.presentation.screens.home.HomeViewModel
 import com.apodaca.diaryapp.presentation.screens.write.WriteScreen
 import com.apodaca.diaryapp.presentation.screens.write.WriteViewModel
-import com.apodaca.diaryapp.util.Constants.APP_ID
-import com.apodaca.diaryapp.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
+import com.apodaca.mongo.repository.MongoDB
+import com.apodaca.util.Constants.APP_ID
+import com.apodaca.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
+import com.apodaca.util.Screen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.stevdzasan.messagebar.rememberMessageBarState
@@ -138,7 +139,6 @@ fun NavGraphBuilder.authenticationRoute(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.homeRoute(
     navigateToWrite: () -> Unit,
     navigateToWriteWithArgs: (String) -> Unit,

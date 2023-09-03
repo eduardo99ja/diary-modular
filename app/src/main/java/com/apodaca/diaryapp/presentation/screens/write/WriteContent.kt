@@ -37,10 +37,10 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.apodaca.util.model.Diary
-import com.apodaca.diaryapp.model.GalleryImage
-import com.apodaca.diaryapp.model.GalleryState
+import com.apodaca.ui.GalleryImage
+import com.apodaca.ui.GalleryState
 import com.apodaca.util.model.Mood
-import com.apodaca.ui.components.GalleryUploader
+import com.apodaca.util.GalleryUploader
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -113,7 +113,7 @@ fun WriteContent(
                     focusedIndicatorColor = Color.Unspecified,
                     disabledIndicatorColor = Color.Unspecified,
                     unfocusedIndicatorColor = Color.Unspecified,
-                    placeholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+//                    placeholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                 ),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Next
@@ -139,7 +139,7 @@ fun WriteContent(
                     focusedIndicatorColor = Color.Unspecified,
                     disabledIndicatorColor = Color.Unspecified,
                     unfocusedIndicatorColor = Color.Unspecified,
-                    placeholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+//                    placeholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
                 ),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Next

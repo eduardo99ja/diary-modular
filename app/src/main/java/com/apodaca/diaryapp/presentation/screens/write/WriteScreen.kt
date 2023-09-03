@@ -35,8 +35,8 @@ import androidx.compose.ui.window.Dialog
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.apodaca.util.model.Diary
-import com.apodaca.diaryapp.model.GalleryImage
-import com.apodaca.diaryapp.model.GalleryState
+import com.apodaca.ui.GalleryImage
+import com.apodaca.ui.GalleryState
 import com.apodaca.util.model.Mood
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState

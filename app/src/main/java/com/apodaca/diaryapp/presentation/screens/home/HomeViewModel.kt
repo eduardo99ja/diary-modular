@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apodaca.util.connectivity.ConnectivityObserver
 import com.apodaca.util.connectivity.NetworkConnectivityObserver
-import com.apodaca.diaryapp.data.database.ImageToDeleteDao
-import com.apodaca.diaryapp.data.database.entity.ImageToDelete
-import com.apodaca.diaryapp.data.repository.Diaries
-import com.apodaca.diaryapp.data.repository.MongoDB
+import com.apodaca.mongo.database.ImageToDeleteDao
+import com.apodaca.mongo.database.entity.ImageToDelete
+import com.apodaca.mongo.repository.Diaries
+import com.apodaca.mongo.repository.MongoDB
 import com.apodaca.util.model.RequestState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage

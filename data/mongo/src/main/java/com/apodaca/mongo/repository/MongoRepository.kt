@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.data.repository
+package com.apodaca.mongo.repository
 
 import com.apodaca.util.model.Diary
 import com.apodaca.util.model.RequestState

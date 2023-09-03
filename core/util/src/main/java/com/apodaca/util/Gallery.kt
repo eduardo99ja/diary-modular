@@ -1,4 +1,4 @@
-package com.apodaca.ui.components
+package com.apodaca.util
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult

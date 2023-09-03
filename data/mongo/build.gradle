@@ -1,10 +1,12 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'io.realm.kotlin'
 }
 
 android {
-    namespace 'com.apodaca.ui'
+    namespace 'com.apodaca.mongo'
     compileSdk ProjectConfig.compileSdk
 
     defaultConfig {
@@ -28,12 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion ProjectConfig.extensionVersion
-    }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
@@ -42,13 +38,15 @@ android {
 }
 
 dependencies {
-    implementation libs.activity.compose
-    implementation libs.material3.compose
-    implementation libs.compose.tooling.preview
-    implementation libs.realm.sync
+
+    implementation libs.core.ktx
     implementation libs.coroutines.core
-    implementation libs.coil
+    implementation libs.realm.sync
+
+    implementation libs.room.runtime
+    implementation libs.room.ktx
+    kapt libs.room.compiler
 
 
-//    implementation(project(":core:util"))
+    implementation(project(":core:util"))
 }
