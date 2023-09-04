@@ -46,7 +46,7 @@ import java.time.ZonedDateTime
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+internal fun HomeScreen(
     diaries: Diaries,
     onMenuClicked: () -> Unit,
     drawerState: DrawerState,
@@ -124,7 +124,7 @@ fun HomeScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationDrawer(
+internal fun NavigationDrawer(
     drawerState: DrawerState,
     onSignOutClicked: () -> Unit,
     onDeleteAllClicked: () -> Unit,
