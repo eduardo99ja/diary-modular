@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.presentation.screens.write
+package com.apodaca.write
 
 import android.annotation.SuppressLint
 import android.net.Uri

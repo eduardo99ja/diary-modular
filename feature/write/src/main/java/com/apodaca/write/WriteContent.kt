@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.presentation.screens.write
+package com.apodaca.write
 
 import android.net.Uri
 import android.widget.Toast

@@ -1,5 +1,6 @@
-package com.apodaca.diaryapp.presentation.screens.write
+package com.apodaca.write
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -110,6 +111,7 @@ class WriteViewModel @Inject constructor(
         }
     }
 
+    @SuppressLint("NewApi")
     fun updateDateTime(zonedDateTime: ZonedDateTime) {
         uiState = uiState.copy(updatedDateTime = zonedDateTime.toInstant().toRealmInstant())
     }
