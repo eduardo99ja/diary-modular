@@ -1,7 +1,5 @@
-package com.apodaca.diaryapp.presentation.screens.home
+package com.apodaca.home
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,7 +24,6 @@ import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.N)
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val connectivity: NetworkConnectivityObserver,

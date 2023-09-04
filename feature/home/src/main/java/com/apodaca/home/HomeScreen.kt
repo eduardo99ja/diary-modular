@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.presentation.screens.home
+package com.apodaca.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -39,7 +39,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.apodaca.diaryapp.R
 import com.apodaca.mongo.repository.Diaries
 import com.apodaca.util.model.RequestState
 import java.time.ZonedDateTime
@@ -144,7 +143,7 @@ fun NavigationDrawer(
                     ) {
                         Image(
                             modifier = Modifier.size(250.dp),
-                            painter = painterResource(id = R.drawable.logo),
+                            painter = painterResource(id = com.apodaca.ui.R.drawable.logo),
                             contentDescription = "Logo Image"
                         )
                     }
@@ -152,7 +151,7 @@ fun NavigationDrawer(
                         label = {
                             Row(modifier = Modifier.padding(horizontal = 12.dp)) {
                                 Icon(
-                                    painter = painterResource(id = R.drawable.google_logo),
+                                    painter = painterResource(id = com.apodaca.ui.R.drawable.google_logo),
                                     contentDescription = "Google Logo",
                                     tint = MaterialTheme.colorScheme.onSurface
                                 )

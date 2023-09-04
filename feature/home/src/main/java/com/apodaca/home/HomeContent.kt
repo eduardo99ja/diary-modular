@@ -1,5 +1,6 @@
-package com.apodaca.diaryapp.presentation.screens.home
+package com.apodaca.home
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -58,7 +59,7 @@ fun HomeContent(
         EmptyPage()
     }
 }
-
+@SuppressLint("NewApi")
 @Composable
 fun DateHeader(localDate: LocalDate) {
     Row(
@@ -140,6 +141,7 @@ fun EmptyPage(
     }
 }
 
+@SuppressLint("NewApi")
 @Composable
 @Preview(showBackground = true)
 fun DateHeaderPreview() {
