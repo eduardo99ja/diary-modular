@@ -2,7 +2,6 @@ package com.apodaca.diaryapp.navigation
 
 import android.widget.Toast
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,18 +13,16 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.apodaca.auth.navigation.authenticationRoute
 import com.apodaca.util.model.Mood
 import com.apodaca.util.model.RequestState
 import com.apodaca.ui.components.DisplayAlertDialog
-import com.apodaca.diaryapp.presentation.screens.auth.AuthenticationScreen
-import com.apodaca.diaryapp.presentation.screens.auth.AuthenticationViewModel
 import com.apodaca.diaryapp.presentation.screens.home.HomeScreen
 import com.apodaca.diaryapp.presentation.screens.home.HomeViewModel
 import com.apodaca.diaryapp.presentation.screens.write.WriteScreen
@@ -36,8 +33,6 @@ import com.apodaca.util.Constants.WRITE_SCREEN_ARGUMENT_KEY
 import com.apodaca.util.Screen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
-import com.stevdzasan.messagebar.rememberMessageBarState
-import com.stevdzasan.onetap.rememberOneTapSignInState
 import io.realm.kotlin.mongodb.App
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -89,55 +84,6 @@ fun SetupNavGraph(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-fun NavGraphBuilder.authenticationRoute(
-    navigateToHome: () -> Unit,
-    onDataLoaded: () -> Unit
-) {
-    composable(route = Screen.Authentication.route) {
-        val viewModel: AuthenticationViewModel = viewModel()
-        val authenticated by viewModel.authenticated
-        val loadingState by viewModel.loadingState
-        val oneTapState = rememberOneTapSignInState()
-        val messageBarState = rememberMessageBarState()
-
-        LaunchedEffect(key1 = Unit) {
-            onDataLoaded()
-        }
-
-        AuthenticationScreen(
-            authenticated = authenticated,
-            loadingState = oneTapState.opened,
-            oneTapState = oneTapState,
-            messageBarState = messageBarState,
-            onSuccessfulFirebaseSignIn = { tokenId ->
-                viewModel.signInWithMongoAtlas(
-                    tokenId = tokenId,
-                    onSuccess = {
-                        messageBarState.addSuccess("Successfully Authenticated!")
-                        viewModel.setLoading(false)
-                    },
-                    onError = {
-                        messageBarState.addError(it)
-                        viewModel.setLoading(false)
-                    }
-                )
-            },
-            onFailedFirebaseSignIn = {
-                messageBarState.addError(it)
-                viewModel.setLoading(false)
-            },
-            onDialogDismissed = { message ->
-                messageBarState.addError(Exception(message))
-                viewModel.setLoading(false)
-            },
-            navigateToHome = navigateToHome
-        ) {
-            oneTapState.open()
-            viewModel.setLoading(true)
-        }
-    }
-}
 
 fun NavGraphBuilder.homeRoute(
     navigateToWrite: () -> Unit,

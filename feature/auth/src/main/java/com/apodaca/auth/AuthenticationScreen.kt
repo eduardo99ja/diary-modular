@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.presentation.screens.auth
+package com.apodaca.auth
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -53,7 +53,7 @@ fun AuthenticationScreen(
             val credential = GoogleAuthProvider.getCredential(tokenId, null)
             FirebaseAuth.getInstance().signInWithCredential(credential)
                 .addOnCompleteListener { task ->
-                    if(task.isSuccessful) {
+                    if (task.isSuccessful) {
                         onSuccessfulFirebaseSignIn(tokenId)
                     } else {
                         task.exception?.let { it -> onFailedFirebaseSignIn(it) }

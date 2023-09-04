@@ -1,4 +1,4 @@
-package com.apodaca.diaryapp.presentation.screens.auth
+package com.apodaca.auth
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
